@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Watchlist</title>
+<link rel="stylesheet" href="/static/style.css">
+</head>
+
+<body>
+
+<div class="navbar">❤️ My Watchlist</div>
+
+<div class="container">
+
+{% if movies|length == 0 %}
+<p>No movies added yet.</p>
+{% endif %}
+
+<div class="grid">
+
+{% for m in movies %}
+
+<div class="card">
+
+<img src="{{m.poster}}" class="watch-poster">
+
+<h3>{{m.title}}</h3>
+
+<p>⭐ {{m.rating}} | {{m.year}}</p>
+
+<a href="/remove/{{m.id}}" class="delete">❌ Remove</a>
+
+</div>
+
+{% endfor %}
+
+</div>
+
+<a href="/">⬅ Back</a>
+
+</div>
+
+</body>
+</html>

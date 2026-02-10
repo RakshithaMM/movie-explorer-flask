@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>{{movie.title}}</title>
+<link rel="stylesheet" href="/static/style.css">
+</head>
+
+<body>
+
+<div class="navbar">🎬 Movie Details</div>
+
+<div class="container">
+
+<div class="detail-wrapper">
+
+<div class="left">
+    <img src="{{movie.poster}}" class="detail-poster">
+</div>
+
+<div class="right">
+
+<h1>{{movie.title}} ({{movie.year}})</h1>
+
+<p class="star">⭐ Rating: {{movie.rating}} / 10</p>
+
+<p>⏱ Runtime: {{movie.runtime}} minutes</p>
+
+{% if movie.trailer %}
+<a class="trailer" target="_blank" href="{{movie.trailer}}">
+▶ Watch Trailer
+</a>
+{% endif %}
+
+<h3>Overview</h3>
+
+<p class="overview">{{movie.overview}}</p>
+
+<h3>Top Cast</h3>
+
+<div class="cast-grid">
+
+{% for c in movie.cast %}
+
+<div class="cast-card">
+
+{% if c.image %}
+<img src="{{c.image}}" class="cast-img">
+{% endif %}
+
+<p class="name">{{c.name}}</p>
+<p class="char">as {{c.character}}</p>
+
+</div>
+
+{% endfor %}
+
+</div>
+
+<a class="back" href="/">⬅ Back</a>
+
+</div>
+
+</div>
+
+</div>
+
+</body>
+</html>

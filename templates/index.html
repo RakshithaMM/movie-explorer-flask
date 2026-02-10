@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Movie App</title>
+<link rel="stylesheet" href="/static/style.css">
+</head>
+
+<body>
+
+<div class="navbar">
+
+    🎬 Movie Explorer
+
+    <span class="nav-right">
+
+    {% if session.user %}
+
+        👤 {{session.user}} |
+        <a href="/watchlist">❤️ Watchlist</a> |
+        <a href="/logout">Logout</a>
+
+    {% else %}
+
+        <a href="/login">Login</a> |
+        <a href="/register">Register</a>
+
+    {% endif %}
+
+    </span>
+
+</div>
+
+
+<div class="container">
+
+<form action="/search" method="post" class="search">
+    <input name="name" placeholder="Search movies...">
+    <button>Search</button>
+</form>
+
+
+<div class="grid">
+
+{% if movies %}
+
+{% for m in movies %}
+
+<div class="card">
+
+<img src="{{m.poster}}" class="poster">
+
+<h3>
+  <a href="/movie/{{m.id}}">{{m.title}}</a>
+</h3>
+
+<p>⭐ {{m.rating}} | {{m.year}}</p>
+
+<p class="desc">
+{{m.overview[:120]}}...
+</p>
+
+<form action="/addfav" method="post">
+
+<input type="hidden" name="id" value="{{m.id}}">
+<input type="hidden" name="title" value="{{m.title}}">
+<input type="hidden" name="poster" value="{{m.poster}}">
+<input type="hidden" name="rating" value="{{m.rating}}">
+<input type="hidden" name="year" value="{{m.year}}">
+
+<button>❤️ Add to Watchlist</button>
+
+</form>
+
+</div>
+
+{% endfor %}
+
+{% endif %}
+
+</div>
+</div>
+
+<footer>
+Data Powered by TMDB
+</footer>
+
+</body>
+</html>
